@@ -5,15 +5,17 @@ import {
   updateProduct,
   deleteProduct,
 } from "../services/products.service.js";
+import { StatusCodes, ReasonPhrases } from "http-status-codes";
 
 const getProducts = async (request, response) => {
   try {
     const products = await getAllProducts();
-    response.status(200).json(products);
+    response.status(StatusCodes.OK).json(products);
   } catch (error) {
-    response
-      .status(500)
-      .json({ message: "Error fetching products", error: error.message });
+    response.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
+      message: ReasonPhrases.INTERNAL_SERVER_ERROR,
+      error: error.message,
+    });
   }
 };
 
@@ -22,13 +24,16 @@ const getProductsById = async (request, response) => {
   try {
     const product = await getProductById(id);
     if (!product) {
-      return response.status(404).json({ message: "Product not found" });
+      return response
+        .status(StatusCodes.NOT_FOUND)
+        .json({ message: "Product not found" });
     }
-    response.status(200).json(product);
+    response.status(StatusCodes.OK).json(product);
   } catch (error) {
-    response
-      .status(500)
-      .json({ message: "Error fetching product", error: error.message });
+    response.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
+      message: ReasonPhrases.INTERNAL_SERVER_ERROR,
+      error: error.message,
+    });
   }
 };
 
@@ -37,7 +42,7 @@ const createProductController = async (request, response) => {
 
   // Type Enforcement
   if (typeof product_name !== "string" || typeof price !== "number") {
-    return response.status(400).json({
+    return response.status(StatusCodes.BAD_REQUEST).json({
       message:
         "Invalid data types: product_name (string) and price (number) are required.",
     });
@@ -52,12 +57,13 @@ const createProductController = async (request, response) => {
   try {
     const result = await createProduct(productData);
     response
-      .status(201)
+      .status(StatusCodes.OK)
       .json({ message: "Product created successfully", result });
   } catch (error) {
-    response
-      .status(500)
-      .json({ message: "Error creating product", error: error.message });
+    response.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
+      message: ReasonPhrases.INTERNAL_SERVER_ERROR,
+      error: error.message,
+    });
   }
 };
 
@@ -68,11 +74,13 @@ const updateProductById = async (request, response) => {
   // Validation
   if (product_name !== undefined && typeof product_name !== "string") {
     return response
-      .status(400)
+      .status(StatusCodes.BAD_REQUEST)
       .json({ message: "product_name must be a string" });
   }
   if (price !== undefined && typeof price !== "number") {
-    return response.status(400).json({ message: "price must be a number" });
+    return response
+      .status(StatusCodes.NOT_FOUND)
+      .json({ message: "price must be a number" });
   }
 
   const updatedData = { ...request.body };
@@ -80,15 +88,18 @@ const updateProductById = async (request, response) => {
   try {
     const result = await updateProduct(id, updatedData);
     if (result.matchedCount === 0) {
-      return response.status(404).json({ message: "Product not found" });
+      return response
+        .status(StatusCodes.NOT_FOUND)
+        .json({ message: "Product not found" });
     }
     response
-      .status(200)
+      .status(StatusCodes.OK)
       .json({ message: "Product updated successfully", result });
   } catch (error) {
-    response
-      .status(500)
-      .json({ message: "Error updating product", error: error.message });
+    response.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
+      message: ReasonPhrases.INTERNAL_SERVER_ERROR,
+      error: error.message,
+    });
   }
 };
 
@@ -97,13 +108,18 @@ const deleteProductById = async (request, response) => {
   try {
     const result = await deleteProduct(id);
     if (result.deletedCount === 0) {
-      return response.status(404).json({ message: "Product not found" });
+      return response
+        .status(StatusCodes.NOT_FOUND)
+        .json({ message: "Product not found" });
     }
-    response.status(200).json({ message: "Product deleted successfully" });
-  } catch (error) {
     response
-      .status(500)
-      .json({ message: "Error deleting product", error: error.message });
+      .status(StatusCodes.OK)
+      .json({ message: "Product deleted successfully" });
+  } catch (error) {
+    response.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
+      message: ReasonPhrases.INTERNAL_SERVER_ERROR,
+      error: error.message,
+    });
   }
 };
 

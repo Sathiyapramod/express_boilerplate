@@ -2,11 +2,12 @@ import express from "express";
 import cors from "cors";
 import { MongoClient } from "mongodb";
 import * as dotenv from "dotenv";
+import http from "http";
 dotenv.config();
 
 const app = express();
 
-const PORT = 4000;
+const PORT = process.env.PORT;
 const MONGO_URL = process.env.MONGO_URL;
 export const client = new MongoClient(MONGO_URL);
 await client.connect();
@@ -26,6 +27,8 @@ app.get("/", (request, response) => {
   });
 });
 
-app.listen(PORT, () => {
-  console.log(`The server is running on the port - ${PORT} 😊`);
+const server = http.createServer(app);
+
+server.listen(PORT, () => {
+  console.log(`The Server is Running on the ${PORT}`);
 });
