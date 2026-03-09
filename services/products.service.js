@@ -34,10 +34,7 @@ const getProductById = async (id) => {
  * @returns
  */
 const createProduct = async (productData) => {
-  return await client
-    .db(MONGO_DATABASE)
-    .collection("products")
-    .insertOne(productData);
+  //todo
 };
 
 /**
@@ -47,10 +44,7 @@ const createProduct = async (productData) => {
  * @returns
  */
 const updateProduct = async (id, updatedData) => {
-  return await client
-    .db(MONGO_DATABASE)
-    .collection("products")
-    .updateOne({ _id: new ObjectId(id) }, { $set: updatedData });
+  //todo
 };
 
 /**
@@ -59,10 +53,7 @@ const updateProduct = async (id, updatedData) => {
  * @returns
  */
 const deleteProduct = async (id) => {
-  return await client
-    .db(MONGO_DATABASE)
-    .collection("products")
-    .deleteOne({ _id: new ObjectId(id) });
+  //todo
 };
 
 export {
