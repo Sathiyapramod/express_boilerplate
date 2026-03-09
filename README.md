@@ -15,6 +15,9 @@ A clean and organized Express.js project structure following best practices for 
 - [Architecture Pattern](#architecture-pattern)
 - [API Endpoints](#api-endpoints)
 - [Dependencies](#dependencies)
+- [Joi Validation for Payload](#joi-validation-for-payload)
+  - [Installation](#joi-installation)
+  - [Payload Validation Requirements](#payload-validation-requirements)
 - [Best Practices](#best-practices)
 
 ---
@@ -67,6 +70,8 @@ C:/folder/index.js>
 The server running on the Port : 4000 😉
 ```
 
+[Back to Top](#table-of-contents)
+
 ### Dotenv for storing environmental variables
 
 - Install the dependency using the below command:
@@ -89,6 +94,8 @@ import "dotenv/config";
 const MONGO_URL = process.env.MONGO_URL;
 ```
 
+[Back to Top](#table-of-contents)
+
 ## MongoDB setup for NodeJS
 
 - Install the dependency using CLI:
@@ -109,6 +116,8 @@ await client.connect(); //This is a calling operation
 //since calling will take some time, await needs to be prefixed
 ```
 
+[Back to Top](#table-of-contents)
+
 ---
 
 ## Project Overview
@@ -127,9 +136,15 @@ expess-boilerplate/
 │   └── products.controller.js
 ├── routers/                 # Route definitions
 │   └── products.routers.js
-└── services/                # Business logic and data operations
-    └── products.service.js
+├── services/                # Business logic and data operations
+│   └── products.service.js
+├── middleware/              # Custom middleware (e.g., validation)
+│   └── validator.middleware.js
+└── schemas/                 # Data validation schemas (Joi)
+    └── products.schema.js
 ```
+
+[Back to Top](#table-of-contents)
 
 ### File Descriptions
 
@@ -148,7 +163,9 @@ expess-boilerplate/
   - `products.routers.js`: Defines routes for product endpoints (GET, POST, PUT, DELETE).
 
 - **services/**: Contains business logic and data access operations. Services are called by controllers to fetch or manipulate data.
-  - `products.service.js`: Contains product-related business logic.
+- `products.service.js`: Contains product-related business logic.
+
+[Back to Top](#table-of-contents)
 
 ## Installation
 
@@ -167,6 +184,8 @@ expess-boilerplate/
 
 3. (Optional) Configure environment variables by creating a `.env` file in the root directory.
 
+[Back to Top](#table-of-contents)
+
 ## Running the Application
 
 Start the development server:
@@ -177,6 +196,8 @@ npm run dev
 
 The application will run on the default port (typically `http://localhost:3000`). Check your `index.js` for the exact port configuration.
 
+[Back to Top](#table-of-contents)
+
 ## Architecture Pattern
 
 This project follows the **MVC (Model-View-Controller)** pattern:
@@ -184,6 +205,8 @@ This project follows the **MVC (Model-View-Controller)** pattern:
 - **Controllers**: Handle HTTP requests and responses
 - **Services**: Contain business logic and interact with the database
 - **Routers**: Define API endpoints and route requests to appropriate controllers
+
+[Back to Top](#table-of-contents)
 
 ## API Endpoints
 
@@ -195,6 +218,8 @@ This project follows the **MVC (Model-View-Controller)** pattern:
 - `PUT /products/:id` - Update a product
 - `DELETE /products/:id` - Delete a product
 
+[Back to Top](#table-of-contents)
+
 ## Dependencies
 
 Common dependencies for this project include:
@@ -205,6 +230,8 @@ Common dependencies for this project include:
 
 View `package.json` for the complete list of dependencies and their versions.
 
+[Back to Top](#table-of-contents)
+
 ## Best Practices
 
 - Keep controllers lean—they should primarily handle request/response logic
@@ -212,3 +239,68 @@ View `package.json` for the complete list of dependencies and their versions.
 - Use meaningful naming conventions for files and functions
 - Add error handling and validation in controllers and services
 - Use environment variables for configuration
+
+[Back to Top](#table-of-contents)
+
+---
+
+## Joi Validation for Payload
+
+We use **Joi** to ensure that incoming request payloads meet the required structure and data types before being processed by the controllers.
+
+### Joi Installation
+
+To install Joi in your project, run:
+
+```bash
+npm install joi
+```
+
+### Payload Validation Requirements
+
+1. **Schema Definition**: All schemas should be stored in the `schemas/` directory. Use descriptive names like `products.schema.js`.
+2. **Middleware Usage**: Use the `validator.middleware.js` to wrap your schemas in the router definition.
+3. **Error Handling**: The middleware automatically returns a `400 Bad Request` with a clear error message if the payload is invalid.
+
+#### Example Implementation
+
+**1. Create Middleware (`middleware/validator.middleware.js`):**
+
+```javascript
+import StatusCodes from "http-status-codes";
+
+const validateBody = (schema) => {
+  return (req, res, next) => {
+    const { error } = schema.validate(req.body);
+
+    if (error) {
+      return res.status(StatusCodes.BAD_REQUEST).json({ error: error.message });
+    }
+    next();
+  };
+};
+
+export default validateBody;
+```
+
+**2. Define Schema (`schemas/products.schema.js`):**
+
+```javascript
+import Joi from "joi";
+
+export const createProductSchema = Joi.object({
+  product_name: Joi.string().required(),
+  price: Joi.number().required(),
+});
+```
+
+**3. Apply in Router (`routers/products.routers.js`):**
+
+```javascript
+import validateBody from "../middleware/validator.middleware.js";
+import { createProductSchema } from "../schemas/products.schema.js";
+
+productsRouters.post("/", validateBody(createProductSchema), createProduct);
+```
+
+[Back to Top](#table-of-contents)
