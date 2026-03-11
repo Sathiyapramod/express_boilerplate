@@ -1,22 +1,20 @@
 import express from "express";
-import {
-  getProducts,
-  getProductsById,
-  createProduct,
-  updateProductById,
-  deleteProductById,
-} from "../controllers/products.controller.js";
+import productController from "../controllers/products.controller.js";
 import { validateSchema } from "../middleware/validate.schema.js";
 import { createProductSchema } from "../schemas/products.schema.js";
 
 const productsRouters = express.Router();
 
-productsRouters.get("/", getProducts);
-productsRouters.get("/:id", getProductsById);
+productsRouters.get("/", productController.getProducts);
+productsRouters.get("/:id", productController.getProductsById);
 
-productsRouters.post("/", validateSchema(createProductSchema), createProduct);
+productsRouters.post(
+  "/",
+  validateSchema(createProductSchema),
+  productController.createProduct,
+);
 
-productsRouters.put("/:id", updateProductById);
-productsRouters.delete("/:id", deleteProductById);
+productsRouters.put("/:id", productController.updateProductById);
+productsRouters.delete("/:id", productController.deleteProductById);
 
 export default productsRouters;

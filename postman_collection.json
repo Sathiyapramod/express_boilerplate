@@ -1,0 +1,548 @@
+{
+	"info": {
+		"_postman_id": "express-boilerplate-collection",
+		"name": "Express Boilerplate API",
+		"description": "API collection for Express Boilerplate project including Products and Cricket modules.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "General",
+			"item": [
+				{
+					"name": "Home Page",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Products",
+			"item": [
+				{
+					"name": "Get All Products",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/products",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"products"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Product By ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/products/:id",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"products",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Product",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"product_name\": \"Sample Product\",\n  \"price\": 500,\n  \"category\": \"Electronics\",\n  \"stock\": 50,\n  \"rating\": 4\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/products",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"products"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Product",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"product_name\": \"Updated Product Name\",\n  \"price\": 600\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/products/:id",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"products",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Product",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/products/:id",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"products",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Cricket",
+			"item": [
+				{
+					"name": "Get All Scores",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/cricket",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"cricket"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Find All Players",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/cricket/all-players",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"cricket",
+								"all-players"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Find India Players",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/cricket/india-players",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"cricket",
+								"india-players"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Find High Scorers",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/cricket/high-scorers",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"cricket",
+								"high-scorers"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Find Quick Batters",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/cricket/quick-batters",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"cricket",
+								"quick-batters"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Find Power Hitters",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/cricket/power-hitters",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"cricket",
+								"power-hitters"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Player Name and Runs",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/cricket/projection-name-runs",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"cricket",
+								"projection-name-runs"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Find Aus or Eng Players",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/cricket/aus-eng-players",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"cricket",
+								"aus-eng-players"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Top 3 Scorers",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/cricket/top-3-scorers",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"cricket",
+								"top-3-scorers"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Player with Most Balls",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/cricket/most-balls-player",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"cricket",
+								"most-balls-player"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Total Runs",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/cricket/total-runs",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"cricket",
+								"total-runs"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Average Runs",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/cricket/average-runs",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"cricket",
+								"average-runs"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Total Players",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/cricket/total-players",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"cricket",
+								"total-players"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Total Runs By Team",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/cricket/total-runs-by-team",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"cricket",
+								"total-runs-by-team"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Player Count By Team",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/cricket/player-count-by-team",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"cricket",
+								"player-count-by-team"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Score By ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/cricket/:id",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"cricket",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Score",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"MS Dhoni\",\n  \"team\": \"CSK\",\n  \"runs\": 50,\n  \"balls\": 30,\n  \"sixes\": 4\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/cricket",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"cricket"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Score",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Virat Kohli\",\n  \"team\": \"RCB\",\n  \"runs\": 80,\n  \"balls\": 60,\n  \"sixes\": 2\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/cricket/:id",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"cricket",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Score",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/cricket/:id",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"cricket",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"variable": [
+		{
+			"key": "base_url",
+			"value": "http://localhost:4000"
+		}
+	]
+}

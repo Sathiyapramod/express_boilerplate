@@ -2,6 +2,7 @@ import express from "express";
 import cors from "cors";
 import { MongoClient } from "mongodb";
 import * as dotenv from "dotenv";
+import config from "./config/index.js";
 import http from "http";
 dotenv.config();
 
@@ -16,10 +17,11 @@ await client.connect();
 app.use(express.json());
 app.use(cors());
 
-export const MONGO_DATABASE = process.env.MONGO_DATABASE;
 
 import productsRouters from "./routers/products.routers.js";
+import cricketRouter from "./routers/cricket.router.js";
 app.use("/products", productsRouters);
+app.use("/cricket", cricketRouter);
 
 app.get("/", (request, response) => {
   return response.send({

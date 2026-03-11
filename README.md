@@ -213,22 +213,50 @@ This project follows the **MVC (Model-View-Controller)** pattern:
 ### Products
 
 - `GET /products` - Retrieve all products
-- `GET /products/:id` - Retrieve a specific product
-- `POST /products` - Create a new product
-- `PUT /products/:id` - Update a product
-- `DELETE /products/:id` - Delete a product
+- `GET /products/:id` - Retrieve a specific product by its ID
+- `POST /products` - Create a new product. Requires `product_name`, `price`, `category`, `stock`, and `rating`.
+- `PUT /products/:id` - Update an existing product by its ID.
+- `DELETE /products/:id` - Remove a product from the database.
+
+### Cricket (Aggregation & CRUD)
+
+- `GET /cricket` - Retrieve all cricket scores
+- `GET /cricket/:id` - Retrieve a specific score by its ID
+- `POST /cricket` - Create a new score. Requires `name`, `team`, `runs`, and `balls`.
+- `PUT /cricket/:id` - Update a score by its ID.
+- `DELETE /cricket/:id` - Delete a score by its ID.
+
+#### Aggregation Endpoints
+- `GET /cricket/all-players` - List all unique player names
+- `GET /cricket/india-players` - Filter players from team 'India'
+- `GET /cricket/high-scorers` - Players with runs > 100
+- `GET /cricket/quick-batters` - Players with strike rate > 150
+- `GET /cricket/power-hitters` - Players with more than 5 sixes
+- `GET /cricket/projection-name-runs` - Get only player names and their runs
+- `GET /cricket/aus-eng-players` - Players from Australia or England
+- `GET /cricket/top-3-scorers` - Top 3 players by runs
+- `GET /cricket/most-balls-player` - Player who faced the most balls
+- `GET /cricket/total-runs` - Calculate total runs across all players
+- `GET /cricket/average-runs` - Calculate average runs per player
+- `GET /cricket/total-players` - Get total count of players
+- `GET /cricket/total-runs-by-team` - Group by team and sum runs
+- `GET /cricket/player-count-by-team` - Group by team and count players
 
 [Back to Top](#table-of-contents)
 
 ## Dependencies
 
-Common dependencies for this project include:
+This project uses the following dependencies as specified in `package.json`:
 
-- **express**: Web framework for Node.js
-- **dotenv**: Environment variable management (optional)
-- **cors**: Cross-Origin Resource Sharing (optional)
+- **express**: (^5.2.1) Web framework for Node.js
+- **mongodb**: (^7.1.0) Official MongoDB driver for Node.js
+- **dotenv**: (^17.3.1) Environment variable management
+- **joi**: (^18.0.2) Data validation library
+- **cors**: (^2.8.6) Cross-Origin Resource Sharing middleware
+- **http-status-codes**: (^2.3.0) Constants enumerating HTTP status codes
 
-View `package.json` for the complete list of dependencies and their versions.
+### Dev Dependencies
+- **nodemon**: (^3.1.14) Monitor for any changes in your source and automatically restart your server
 
 [Back to Top](#table-of-contents)
 

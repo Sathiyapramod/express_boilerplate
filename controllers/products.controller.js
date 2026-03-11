@@ -1,12 +1,6 @@
 import productServices from "../services/products.service.js";
 import { StatusCodes } from "http-status-codes";
 
-/**
- *
- * @param {*} request
- * @param {*} response
- */
-
 const getProducts = async (request, response) => {
   const data = await productServices.getAllProducts();
   if (data.length == 0)
@@ -32,7 +26,7 @@ const getProductsById = async (request, response) => {
   }
 };
 
-const createProductController = async (request, response) => {
+const createProduct = async (request, response) => {
   const payload = request.body;
   console.log(payload);
   // products Service
@@ -83,7 +77,6 @@ const deleteProductById = async (request, response) => {
       .status(StatusCodes.NOT_FOUND)
       .json({ message: `Invalid Id - ${id} is not found` });
   } else {
-    
     // deletion completed
     return response
       .status(StatusCodes.OK)
@@ -91,10 +84,12 @@ const deleteProductById = async (request, response) => {
   }
 };
 
-export {
+const productController = {
   getProducts,
   getProductsById,
-  createProductController as createProduct,
+  createProduct,
   updateProductById,
   deleteProductById,
 };
+
+export default productController;
