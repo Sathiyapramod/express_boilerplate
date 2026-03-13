@@ -15,3 +15,28 @@ internal server error 500
 Bonus:
 * have Joi validation for your payloads - (create, update)
 * 2nd Task -> integrate your APIs (5 nos ) with React Application
+
+
+jwt - json web token 
+
+token - unique pattern -> [A-Z0-9]
+time based -> token customize 
+SECRET_KEY -> to access the token, some match (signature) has to be verified. 
+This matching will follow an algorithm
+
+password hashing -> 
+
+1. Password 
+2. Salting -> checkSum 
+
+
+Authentication -> 
+Authorization -> 
+
+Hashing -> bcrypt 
+
+1. password -> input 
+2. salting process through 
+
+JWT token -> jsonwebtoken 
+

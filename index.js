@@ -3,6 +3,9 @@ import cors from "cors";
 import { MongoClient } from "mongodb";
 import * as dotenv from "dotenv";
 import http from "http";
+import productsRouters from "./routers/products.routers.js";
+import authRouter from "./routers/auth.router.js";
+
 dotenv.config();
 
 const app = express();
@@ -18,7 +21,7 @@ app.use(cors());
 
 export const MONGO_DATABASE = process.env.MONGO_DATABASE;
 
-import productsRouters from "./routers/products.routers.js";
+app.use("/auth", authRouter);
 app.use("/products", productsRouters);
 
 app.get("/", (request, response) => {
