@@ -10,4 +10,10 @@ async function genHashedPassword(pwd) {
   return hashedPassword;
 }
 
-export default genHashedPassword;
+async function comparePassword(payloadPassword, dbPassword) {
+  return await bcrypt.compare(payloadPassword, dbPassword);
+}
+
+const auth = { genHashedPassword, comparePassword };
+
+export default auth;

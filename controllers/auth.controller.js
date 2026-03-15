@@ -7,15 +7,20 @@ async function Register(request, response) {
   // password
   const { firstName, email, password } = request.body;
   const newUser = await authService.Register(firstName, email, password);
-  // if (newUser.status == false) {
-  //   return response
-  //     .status(StatusCodes.BAD_REQUEST)
-  //     .json({ message: newUser.message });
-  // } else {
-  //   return response
-  //     .status(StatusCodes.OK)
-  //     .json({ message: newUser.message });
-  // }
+  // ?? option 1
+  /*
+  if (newUser.status == false) {
+    return response
+      .status(StatusCodes.BAD_REQUEST)
+      .json({ message: newUser.message });
+  } else {
+    return response
+      .status(StatusCodes.OK)
+      .json({ message: newUser.message });
+  }
+  */
+
+  // ?? option 2
   return response
     .status(newUser.status == true ? StatusCodes.OK : StatusCodes.BAD_REQUEST)
     .json({
@@ -23,7 +28,15 @@ async function Register(request, response) {
     });
 }
 
-function Login(request, response) {}
+async function Login(request, response) {
+  const { email, password } = request.body;
+  const checkLoginStatus = await authService.Login(email, password);
+
+  const { status, message } = checkLoginStatus;
+  return response
+    .status(status === true ? StatusCodes.OK : StatusCodes.BAD_REQUEST)
+    .json({ ...message });
+}
 
 const authController = {
   Register,

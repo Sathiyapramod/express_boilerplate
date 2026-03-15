@@ -1,5 +1,8 @@
+import * as dotenv from "dotenv";
+dotenv.config();
+
 const config = {
-  database: "b61-express",
+  database: process.env.MONGO_DATABASE,
 };
 
 export default config;
