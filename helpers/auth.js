@@ -10,4 +10,15 @@ async function genHashedPassword(pwd) {
   return hashedPassword;
 }
 
-export default genHashedPassword;
+// 2. compare password
+// either true or false
+async function comparePassword(payloadPassword, dbPassword) {
+  return await bcrypt.compare(payloadPassword, dbPassword);
+}
+
+const authHelper = {
+  genHashedPassword,
+  comparePassword,
+};
+
+export default authHelper;

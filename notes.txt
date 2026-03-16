@@ -40,3 +40,25 @@ Hashing -> bcrypt
 
 JWT token -> jsonwebtoken 
 
+
+
+API's 
+
+1. private
+
+headers -> {
+     Authorization : Bearer <token>
+}
+
+middleware -> 
+
+
+2. public 
+
+
+Cash -No 
+Cache 
+
+Caching -> redis (store cached data at RAM (or) near to RAM ) , memcache 
+
+

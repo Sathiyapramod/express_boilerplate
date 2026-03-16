@@ -4,7 +4,7 @@ import { client, MONGO_DATABASE } from "../index.js";
 const getAllProducts = async () => {
   return await client
     .db(MONGO_DATABASE)
-    .collection("products")
+    .collection("ecom_products")
     .find({})
     .toArray();
 };
@@ -13,7 +13,7 @@ const getProductById = async (id) => {
   try {
     const data = await client
       .db(MONGO_DATABASE)
-      .collection("products")
+      .collection("ecom_products")
       .findOne({ _id: new ObjectId(id) });
     if (data) return data;
     else return null;
@@ -28,7 +28,7 @@ const createProduct = async (productData) => {
     const { product_name, price } = productData;
     const temp = await client
       .db(MONGO_DATABASE)
-      .collection("products")
+      .collection("ecom_products")
       .insertOne({
         product_name: product_name,
         price: price,
@@ -46,7 +46,7 @@ const updateProduct = async (id, updatedData) => {
 
     const temp = await client
       .db(MONGO_DATABASE)
-      .collection("products")
+      .collection("ecom_products")
       .updateOne(
         {
           _id: new ObjectId(id),
@@ -79,7 +79,7 @@ const deleteProduct = async (id) => {
     // perform deletion
     await client
       .db(MONGO_DATABASE)
-      .collection("products")
+      .collection("ecom_products")
       .deleteOne({
         _id: new ObjectId(id),
       });

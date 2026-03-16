@@ -23,7 +23,13 @@ async function Register(request, response) {
     });
 }
 
-function Login(request, response) {}
+async function Login(request, response) {
+  const { email, password } = request.body;
+  const { status, message } = await authService.Login(email, password);
+  return response
+    .status(status === false ? StatusCodes.BAD_REQUEST : StatusCodes.OK)
+    .json(message);
+}
 
 const authController = {
   Register,
