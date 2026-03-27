@@ -5,6 +5,7 @@ import * as dotenv from "dotenv";
 import http from "http";
 import productsRouters from "./routers/products.routers.js";
 import authRouter from "./routers/auth.router.js";
+import logger from "./utils/logger.js";
 
 dotenv.config();
 
@@ -33,5 +34,5 @@ app.get("/", (request, response) => {
 const server = http.createServer(app);
 
 server.listen(PORT, () => {
-  console.log(`The Server is Running on the ${PORT}`);
+  logger.error(`The Server is running on the port - ${PORT}`);
 });

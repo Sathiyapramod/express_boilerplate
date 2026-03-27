@@ -62,3 +62,8 @@ Cache
 Caching -> redis (store cached data at RAM (or) near to RAM ) , memcache 
 
 
+
+
+write a HTML file 
+
+<div></div>
