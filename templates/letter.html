@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+     <meta charset="UTF-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <title>Leave letter</title>
+</head>
+
+<!-- 
+fromName
+toName
+subject
+description
+leaveDate
+letterDate
+
+-->
+
+
+<body>
+     <div>
+          <p>
+               From,
+          </p>
+          <!-- From name should come here -->
+          <div>{{fromName}}</div>
+
+          <br><br>
+          <p>
+               To,
+          </p>
+          <!-- To name should come here -->
+          <div>{{toName}}</div>
+          <br><br>
+          <p>Sir/Madam</p>
+          <!-- Subject should come here -->
+          <div>{{subject}}</div>
+
+          <!-- Description + Date should come here -->
+          <div>
+               As I need to attend my {{description}} on the date {{leaveDate}}
+          </div>
+
+          <p>Thanks/Regards</p>
+          <!-- from name should come here -->
+          <div>
+               {{fromName}}
+          </div>
+     </div>
+
+</body>
+
+</html>

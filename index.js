@@ -5,6 +5,7 @@ import * as dotenv from "dotenv";
 import http from "http";
 import productsRouters from "./routers/products.routers.js";
 import authRouter from "./routers/auth.router.js";
+import lettersRouter from "./routers/letters.router.js";
 import logger from "./utils/logger.js";
 
 dotenv.config();
@@ -24,6 +25,7 @@ export const MONGO_DATABASE = process.env.MONGO_DATABASE;
 
 app.use("/auth", authRouter);
 app.use("/products", productsRouters);
+app.use("/letter", lettersRouter);
 
 app.get("/", (request, response) => {
   return response.send({
